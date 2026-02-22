@@ -26,6 +26,7 @@ configurePassport();
 job.start();
 
 const app = express();
+app.set("trust proxy", 1);
 
 const httpServer = http.createServer(app);
 
@@ -46,6 +47,8 @@ app.use(
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			httpOnly: true, // this option prevents the Cross-Site Scripting (XSS) attacks
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+			secure: process.env.NODE_ENV === "production",
 		},
 		store: store,
 	})
