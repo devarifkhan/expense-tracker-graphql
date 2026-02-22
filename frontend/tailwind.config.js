@@ -1,5 +1,8 @@
-import svgToDataUri from "mini-svg-data-uri";
 import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColorPalette";
+
+function svgToDataUri(svg) {
+	return `data:image/svg+xml,${encodeURIComponent(svg).replace(/'/g, "%27").replace(/"/g, "%22")}`;
+}
 
 /** @type {import('tailwindcss').Config} */
 export default {
