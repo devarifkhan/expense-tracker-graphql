@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import User from "./models/user.model.js";
 import Transaction from "./models/transaction.model.js";
 
-dotenv.config();
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: join(__dirname, "../.env") });
 
 const seed = async () => {
 	await mongoose.connect(process.env.MONGO_URI);
